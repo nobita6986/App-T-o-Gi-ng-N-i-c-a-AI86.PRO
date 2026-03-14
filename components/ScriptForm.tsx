@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect, useMemo } from 'react';
 import { TTSConfig, TTSProvider, SavedScript } from '../types';
-import { VOICES, TONES, STYLES, LANGUAGES, PROVIDERS, GEMINI_MODELS, VoiceOption } from '../constants';
+import { VOICES, TONES, STYLES, LANGUAGES, PROVIDERS, VoiceOption } from '../constants';
 import { generateSpeechGemini } from '../services/geminiService';
 import { Sparkles, Edit3, ChevronRight, Sliders, MessageSquare, Play, Pause, Loader2, HelpCircle, Globe, ChevronDown, ChevronUp } from 'lucide-react';
 
@@ -51,7 +51,7 @@ export const ScriptForm: React.FC<ScriptFormProps> = ({
   const [tone, setTone] = useState(TONES[0]);
   const [style, setStyle] = useState(STYLES[0]);
   const [instructions, setInstructions] = useState("");
-  const [geminiModel, setGeminiModel] = useState(GEMINI_MODELS[0].id);
+  const [geminiModel, setGeminiModel] = useState('gemini-2.5-flash-preview-tts');
   
   const [showAdvancedSettings, setShowAdvancedSettings] = useState(false);
 
@@ -225,29 +225,6 @@ export const ScriptForm: React.FC<ScriptFormProps> = ({
 
       <form onSubmit={handleSubmit} className="p-6 flex-1 flex flex-col space-y-6 overflow-y-auto custom-scrollbar">
         
-        <div className="space-y-2 animate-fade-in">
-          <TooltipLabel 
-            label="Gemini TTS Model"
-            icon={Sparkles}
-            colorClass="text-brand-400"
-            tooltip="Chọn phiên bản mô hình Gemini. 'Flash' cho tốc độ cực nhanh, 'Pro' cho chất lượng âm thanh và độ biểu cảm cao hơn."
-          />
-          <div className="relative">
-            <select
-              value={geminiModel}
-              onChange={(e) => setGeminiModel(e.target.value)}
-              className="w-full appearance-none bg-slate-900 border border-brand-500/30 rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-brand-500 cursor-pointer text-sm"
-            >
-              {GEMINI_MODELS.map((m) => (
-                <option key={m.id} value={m.id}>
-                  {m.name}
-                </option>
-              ))}
-            </select>
-            <ChevronRight className="w-4 h-4 text-brand-400 absolute right-3 top-1/2 -translate-y-1/2 rotate-90 pointer-events-none" />
-          </div>
-        </div>
-
         <div className="space-y-2">
            <TooltipLabel 
              label="Ngôn ngữ đầu vào"

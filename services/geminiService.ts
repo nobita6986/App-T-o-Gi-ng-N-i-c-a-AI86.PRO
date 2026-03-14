@@ -1,7 +1,7 @@
 
 import { GoogleGenAI, Modality, Type } from "@google/genai";
 import { TTSConfig, AudioSegment } from "../types";
-import { LANGUAGES, GEMINI_MODELS } from "../constants";
+import { LANGUAGES } from "../constants";
 
 // --- KEY MANAGEMENT LOGIC ---
 
@@ -180,7 +180,7 @@ export const generateSpeechGemini = async (config: TTSConfig): Promise<{ audioUr
   const audioParts: Uint8Array[] = [];
 
   // Use selected model or default to flash
-  const ttsModel = config.geminiModel || GEMINI_MODELS[0].id;
+  const ttsModel = config.geminiModel || 'gemini-2.5-flash-preview-tts';
   const targetVoice = rawVoiceName;
 
   // Build Persona Instructions
